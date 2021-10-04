@@ -11,6 +11,15 @@ For assistance:
    Reach out in your Slack community: https://treehouse-fsjs-102.slack.com/app_redirect?channel=unit-2
 */
 
+const header = document.querySelector('header.header')
+header.insertAdjacentHTML(
+   'beforeend',
+   `<label for="search" class="student-search">
+   <span>Search by name</span>
+   <input id="search" placeholder="Search by name...">
+   <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
+ </label>`
+)
 
 /*
 Create the `showPage` function
@@ -30,7 +39,7 @@ function showPage(list, page = 1) {
             `<li class="student-item cf">
             <div class="student-details">
               <img class="avatar" src="${data[i].picture["large"]}" alt="Profile Picture">
-              <h3>${data[i].name["first"], data[i].name["last"]}</h3>
+              <h3>${data[i].name["first"]} ${data[i].name["last"]}</h3>
               <span class="email">${data[i].email}</span>
             </div>
             <div class="joined-details">
@@ -86,3 +95,21 @@ function addPagination() {
 // Call functions
 showPage(data)
 addPagination()
+
+function searchFunc(query) {
+   let filteredStudents = []
+
+   for(i=0; i < data.length; i++) {
+      if(`${data[i].name["first"]} ${data[i].name["last"]}`.toUpperCase().includes(query.toUpperCase())) {
+         filteredStudents += data[i]
+      }
+   }
+
+   showPage(filteredStudents)
+}
+
+const search = document.querySelector('input#search')
+const label = document.querySelector('label.student-search')
+
+search.addEventListener('keyup', searchFunc(search.value))
+label.addEventListener('submit', searchFunc(search.value))
