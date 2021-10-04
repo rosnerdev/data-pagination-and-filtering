@@ -1,0 +1,88 @@
+/*
+Treehouse Techdegree:
+FSJS Project 2 - Data Pagination and Filtering
+*/
+
+
+
+/*
+For assistance:
+   Check out the "Project Resources" section of the Instructions tab: https://teamtreehouse.com/projects/data-pagination-and-filtering#instructions
+   Reach out in your Slack community: https://treehouse-fsjs-102.slack.com/app_redirect?channel=unit-2
+*/
+
+
+/*
+Create the `showPage` function
+This function will create and insert/append the elements needed to display a "page" of nine students
+*/
+
+function showPage(list, page = 1) {
+   const startindex = (page * 9) - 9
+   const endindex = page * 9
+   let ul = document.querySelector('ul.student-list')
+   ul.innerHTML = ''
+
+   for (i=0; i < list.length; i++) {
+      if (i >= startindex && i < endindex) {
+         ul.insertAdjacentHTML(
+            'beforeend',
+            `<li class="student-item cf">
+            <div class="student-details">
+              <img class="avatar" src="${data[i].picture["large"]}" alt="Profile Picture">
+              <h3>${data[i].name["first"], data[i].name["last"]}</h3>
+              <span class="email">${data[i].email}</span>
+            </div>
+            <div class="joined-details">
+              <span class="date">Joined ${data[i].registered["date"]}</span>
+            </div>
+          </li>`
+         );
+      }
+   }
+}
+
+
+/*
+Create the `addPagination` function
+This function will create and insert/append the elements needed for the pagination buttons
+*/
+function addPagination() {
+   let ul = document.querySelector('ul.link-list')
+   ul.innerHTML = ''
+
+   // Inserted the wanted number of buttons
+   ul.insertAdjacentHTML(
+      'afterbegin',
+      `<li>
+         <button type="button" class="active">${1}</button>
+      </li>`
+   )
+   
+   // A for loop that is iterating over all the objects inside the data variable in each page
+   for(i=1; i < Math.ceil(data.length / 9); i++) {
+   ul.insertAdjacentHTML(
+      'beforeend',
+      `<li>
+         <button type="button">${i + 1}</button>
+      </li>`
+   )
+   }
+
+   // Created an event listener that listens for button clicks and navigates through pages
+   ul.addEventListener('click', function(event){
+      if(event.target.tagName === "BUTTON") {
+         //Styles the buttons
+         document.querySelector('.active').removeAttribute("class")
+         event.target.className = "active"
+
+         // Makes the buttons navigate through pages
+         showPage(data, event.target.textContent)
+      }
+   })
+}
+
+
+// Call functions
+showPage(data)
+addPagination()
