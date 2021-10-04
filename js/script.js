@@ -100,12 +100,26 @@ function searchFunc(query) {
    let filteredStudents = []
 
    for(i=0; i < data.length; i++) {
+      let ul = document.querySelector('ul.student-list')
+      ul.innerHTML = ''
+
       if(`${data[i].name["first"]} ${data[i].name["last"]}`.toUpperCase().includes(query.toUpperCase())) {
          filteredStudents += data[i]
+         ul.insertAdjacentHTML(
+            'beforeend',
+            `<li class="student-item cf">
+                  <div class="student-details">
+                    <img class="avatar" src="${filteredStudents[i].picture["large"]}" alt="Profile Picture">
+                    <h3>${filteredStudents[i].name["first"]} ${filteredStudents[i].name["last"]}</h3>
+                    <span class="email">${filteredStudents[i].email}</span>
+                  </div>
+                  <div class="joined-details">
+                    <span class="date">Joined ${filteredStudents[i].registered["date"]}</span>
+                  </div>
+                </li>`
+         )
       }
    }
-
-   showPage(filteredStudents)
 }
 
 const search = document.querySelector('input#search')
