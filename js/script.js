@@ -56,7 +56,7 @@ function showPage(list, page = 1) {
 Create the `addPagination` function
 This function will create and insert/append the elements needed for the pagination buttons
 */
-function addPagination() {
+function addPagination(list) {
    let ul = document.querySelector('ul.link-list')
    ul.innerHTML = ''
 
@@ -69,7 +69,7 @@ function addPagination() {
    )
    
    // A for loop that is iterating over all the objects inside the data variable in each page
-   for(i=1; i < Math.ceil(data.length / 9); i++) {
+   for(i=1; i < Math.ceil(list.length / 9); i++) {
    ul.insertAdjacentHTML(
       'beforeend',
       `<li>
@@ -86,7 +86,7 @@ function addPagination() {
          event.target.className = "active"
 
          // Makes the buttons navigate through pages
-         showPage(data, event.target.textContent)
+         showPage(list, event.target.textContent)
       }
    })
 }
@@ -94,7 +94,7 @@ function addPagination() {
 
 // Call functions
 showPage(data)
-addPagination()
+addPagination(data)
 
 function searchFunc(query) {
    let filteredStudents = []
