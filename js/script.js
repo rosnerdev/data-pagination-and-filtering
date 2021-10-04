@@ -102,7 +102,7 @@ function searchFunc(query) {
    for(i=0; i < data.length; i++) {
       if(`${data[i].name["first"]} ${data[i].name["last"]}`.toUpperCase().includes(query.toUpperCase())) {
          filteredStudents.push(data[i]) 
-      }
+      } else if(document.querySelector('ul.student-list').innerHTML = '<p>404</p>') {}
 
       showPage(filteredStudents)
    }
