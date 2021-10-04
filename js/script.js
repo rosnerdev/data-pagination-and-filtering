@@ -38,12 +38,12 @@ function showPage(list, page = 1) {
             'beforeend',
             `<li class="student-item cf">
             <div class="student-details">
-              <img class="avatar" src="${data[i].picture["large"]}" alt="Profile Picture">
-              <h3>${data[i].name["first"]} ${data[i].name["last"]}</h3>
-              <span class="email">${data[i].email}</span>
+              <img class="avatar" src="${list[i].picture["large"]}" alt="Profile Picture">
+              <h3>${list[i].name["first"]} ${list[i].name["last"]}</h3>
+              <span class="email">${list[i].email}</span>
             </div>
             <div class="joined-details">
-              <span class="date">Joined ${data[i].registered["date"]}</span>
+              <span class="date">Joined ${list[i].registered["date"]}</span>
             </div>
           </li>`
          );
@@ -100,25 +100,11 @@ function searchFunc(query) {
    let filteredStudents = []
 
    for(i=0; i < data.length; i++) {
-      let ul = document.querySelector('ul.student-list')
-      ul.innerHTML = ''
-
       if(`${data[i].name["first"]} ${data[i].name["last"]}`.toUpperCase().includes(query.toUpperCase())) {
-         filteredStudents += data[i]
-         ul.insertAdjacentHTML(
-            'beforeend',
-            `<li class="student-item cf">
-                  <div class="student-details">
-                    <img class="avatar" src="${filteredStudents[i].picture["large"]}" alt="Profile Picture">
-                    <h3>${filteredStudents[i].name["first"]} ${filteredStudents[i].name["last"]}</h3>
-                    <span class="email">${filteredStudents[i].email}</span>
-                  </div>
-                  <div class="joined-details">
-                    <span class="date">Joined ${filteredStudents[i].registered["date"]}</span>
-                  </div>
-                </li>`
-         )
+         filteredStudents.push(data[i]) 
       }
+
+      showPage(filteredStudents)
    }
 }
 
