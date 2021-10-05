@@ -111,6 +111,7 @@ function searchFunc() {
       ul.innerHTML = h3
    } else if (ul.innerHTML !== h3) {
       showPage(filteredStudents)
+      addPagination(filteredStudents)
    }
 }
 
