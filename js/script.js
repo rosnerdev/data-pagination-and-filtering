@@ -29,7 +29,7 @@ This function will create and insert/append the elements needed to display a "pa
 function showPage(list, page = 1) {
    const startindex = (page * 9) - 9
    const endindex = page * 9
-   let ul = document.querySelector('ul.student-list')
+   const ul = document.querySelector('ul.student-list')
    ul.innerHTML = ''
 
    for (i=0; i < list.length; i++) {
@@ -57,7 +57,7 @@ Create the `addPagination` function
 This function will create and insert/append the elements needed for the pagination buttons
 */
 function addPagination(list) {
-   let ul = document.querySelector('ul.link-list')
+   const ul = document.querySelector('ul.link-list')
    ul.innerHTML = ''
 
    // Inserted the wanted number of buttons
