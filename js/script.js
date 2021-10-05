@@ -96,14 +96,20 @@ function addPagination(list) {
 showPage(data)
 addPagination(data)
 
-function searchFunc(query) {
+function searchFunc() {
    let filteredStudents = []
+   const h3 = '<h3>404. No matching results found</h3>'
+   const ul = document.querySelector('ul.student-list')
 
    for(i=0; i < data.length; i++) {
-      if(`${data[i].name["first"]} ${data[i].name["last"]}`.toUpperCase().includes(query.toUpperCase())) {
+      if(`${data[i].name.first} ${data[i].name.last}`.toUpperCase().includes(search.value.toUpperCase())) {
          filteredStudents.push(data[i]) 
-      } else if(document.querySelector('ul.student-list').innerHTML = '<p>404</p>') {}
-
+      }
+   }
+   
+   if(!filteredStudents) {
+      ul.innerHTML = h3
+   } else if (ul.innerHTML !== h3) {
       showPage(filteredStudents)
    }
 }
@@ -111,5 +117,5 @@ function searchFunc(query) {
 const search = document.querySelector('input#search')
 const label = document.querySelector('label.student-search')
 
-search.addEventListener('keyup', searchFunc(search.value))
-label.addEventListener('submit', searchFunc(search.value))
+search.addEventListener('keyup', searchFunc)
+label.addEventListener('submit', searchFunc)
